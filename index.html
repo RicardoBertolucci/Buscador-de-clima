@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Buscador de Clima</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="weather__header">
+      <search class="weather__search">
+        <label class="weather__search-container">
+          <i
+            class="fa-solid fa-magnifying-glass weather__magnifying-icon"
+            aria-hidden="true"
+          ></i>
+          <input
+            type="search"
+            aria-label="Buscar cidade"
+            placeholder="Buscar cidade"
+            class="weather__input"
+          />
+        </label>
+
+        <!-- ÚLTIMAS 5 BUSCAS -->
+        <ul class="weather__recent-searches">
+          <li class="weather__search-item">
+            <button class="weather__btn-city" type="button">São Paulo</button>
+          </li>
+          <li class="weather__search-item">
+            <button class="weather__btn-city" type="button">Cambuí</button>
+          </li>
+          <li class="weather__search-item">
+            <button class="weather__btn-city" type="button">Curitiba</button>
+          </li>
+          <li class="weather__search-item">
+            <button class="weather__btn-city" type="button">Pintópolis</button>
+          </li>
+          <li class="weather__search-item">
+            <button class="weather__btn-city" type="button">Palmas</button>
+          </li>
+        </ul>
+      </search>
+      <i
+        class="fa-solid fa-wind weather__icon-wind-header"
+        aria-hidden="true"
+      ></i>
+    </header>
+
+    <main class="weather__container-main">
+      <!-- CARREGANDO -->
+      <div class="weather__loading" hidden>
+        <div class="weather__icon-loading"></div>
+        <!-- spinner: gira por animação CSS -->
+        <p class="weather__text-loading">Buscando cidade...</p>
+      </div>
+
+      <!-- ERRO -->
+      <div class="weather__error" hidden>
+        <!-- texto trocado pelo JS -->
+        <p class="weather__text-not-found">Cidade não encontrada.</p>
+      </div>
+
+      <div class="weather__success">
+        <!-- Section da cidade escolhida -->
+        <section class="weather__city-container">
+          <div class="weather__city-info">
+            <div class="weather__city-choose">
+              <h1 class="weather__city-name">Madrid</h1>
+              <p class="weather__city-rain">Chance de chuva: 0%</p>
+            </div>
+            <span class="weather__city-temp">31°</span>
+          </div>
+          <span class="weather__icon-current" role="img" aria-label="Ensolarado"
+            >☀️</span
+          >
+        </section>
+
+        <!-- Section da previsão do dia -->
+        <section class="weather__forecast-container">
+          <h2 class="weather__subtitle">Previsão de hoje</h2>
+          <ul class="weather__list-time">
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T06:00"
+                >6:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T09:00"
+                >9:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T12:00"
+                >12:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T15:00"
+                >15:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T18:00"
+                >18:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-18T21:00"
+                >21:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+
+            <li class="weather__item-time">
+              <time class="weather__time" datetime="2026-08-19T00:00"
+                >00:00</time
+              >
+              <span class="weather__icon-hour" role="img" aria-label="Nublado"
+                >☁️</span
+              >
+              <span class="weather__forecast-temp">25°</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section das condições do ar -->
+        <section class="weather__conditions-air">
+          <h2 class="weather__subtitle">Condições do ar</h2>
+          <ul class="weather__list-conditions">
+            <li class="weather__item-condition">
+              <span class="weather__icon-condition" aria-hidden="true">🌡️</span>
+              <div class="weather__condition-info">
+                <p class="weather__text-condition">Sensação térmica</p>
+                <span class="weather__info-condition">30°</span>
+              </div>
+            </li>
+
+            <li class="weather__item-condition">
+              <span class="weather__icon-condition" aria-hidden="true">🍃</span>
+              <div class="weather__condition-info">
+                <p class="weather__text-condition">Vento</p>
+                <span class="weather__info-condition">0.2km/h</span>
+              </div>
+            </li>
+
+            <li class="weather__item-condition">
+              <span class="weather__icon-condition" aria-hidden="true">💧</span>
+              <div class="weather__condition-info">
+                <p class="weather__text-condition">Chance de chuva</p>
+                <span class="weather__info-condition">0%</span>
+              </div>
+            </li>
+
+            <li class="weather__item-condition">
+              <span class="weather__icon-condition" aria-hidden="true">🌡️</span>
+              <div class="weather__condition-info">
+                <p class="weather__text-condition">Índice de UV</p>
+                <span class="weather__info-condition">3</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Previsão semanal -->
+        <section class="weather__forecast-weekly">
+          <h2 class="weather__subtitle">Previsão semanal</h2>
+          <ul class="weather__list-weekly">
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-17"
+                >Segunda</time
+              >
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-18">Hoje</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-19">Quarta</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-20">Quinta</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-21">Sexta</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-22">Sábado</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+
+            <li class="weather__item-weekly">
+              <time class="weather__weekday" datetime="2026-08-23">Domingo</time>
+              <div class="weather__weekly-info">
+                <span class="weather__icon-day" aria-hidden="true">☀️</span>
+                <p class="weather__status-text">Ensolarado</p>
+              </div>
+              <div class="weather__temp">
+                <span class="weather__temp-max">36</span>
+                /
+                <span class="weather__temp-min">22</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="weather__footer">
+      <p class="weather__footer-paragraph">&copy; Desenvolvido por Ricardo Zampolo Bertolucci Cruz - 2026</p>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/c563b4c310.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

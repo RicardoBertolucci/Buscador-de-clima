@@ -1,0 +1,524 @@
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Botão e input não herdam a fonte do body por padrão (vinham em Arial) */
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove o espaço de baseline que o SVG ganha por ser inline */
+svg {
+  display: block;
+}
+
+/* O atributo hidden precisa vencer o display das classes de estado */
+[hidden] {
+  display: none !important;
+}
+
+/* ===== DEFAULT ===== */
+:root {
+  --main-background: #0b131e;
+  --secondary-background: #202b3b;
+  --default-text-color: #9399a2;
+  --highlight-color: #dde0e4;
+  --divider-color: #2f3b4d;
+  --translucent-surface: #c4cad341;
+  --alert-color: #e5a34a;
+  --font: "Rubik", sans-serif;
+
+  --card-radius: 1rem;
+  --card-padding: clamp(0.75rem, min(2vh, 3vw), 1.25rem);
+  --block-gap: clamp(0.5rem, min(2.5vh, 2.2vw), 2rem);
+
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 0;
+  background-color: var(--main-background);
+  font-family: var(--font);
+  /* Fixo de propósito: com line-height "normal" a altura da página muda
+     conforme a fonte que carregar, e aí o layout deixa de caber na tela */
+  line-height: 1.2;
+  color: var(--default-text-color);
+}
+
+/* ===== TIPOGRAFIA COMPARTILHADA =====
+   As duas decisões que se repetiam em quase toda seção, num lugar só */
+.weather__city-name,
+.weather__city-temp,
+.weather__forecast-temp,
+.weather__info-condition,
+.weather__status-text,
+.weather__temp-max,
+.weather__text-loading,
+.weather__text-not-found,
+.weather__footer-paragraph {
+  color: var(--highlight-color);
+}
+
+.weather__time,
+.weather__city-temp,
+.weather__forecast-temp,
+.weather__info-condition,
+.weather__status-text,
+.weather__temp,
+.weather__footer-paragraph {
+  font-weight: 700;
+}
+
+/* ===== HEADER ===== */
+.weather__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.weather__search {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.weather__search-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--secondary-background);
+}
+
+/* Anel de foco no container, já que o input tem o outline removido */
+.weather__search-container:focus-within {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 2px;
+}
+
+.weather__magnifying-icon {
+  color: var(--highlight-color);
+  cursor: pointer;
+}
+
+.weather__input {
+  flex: 1;
+  min-width: 0;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  font-size: 0.875rem;
+  color: var(--highlight-color);
+}
+
+.weather__input:focus {
+  outline: 0;
+}
+
+.weather__input::placeholder {
+  color: var(--highlight-color);
+}
+
+.weather__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* ===== RECENT SEARCHES ===== */
+.weather__recent-searches {
+  position: absolute;
+  top: calc(100% - 0.75rem);
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 1.25rem 0.25rem 0.25rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background-color: var(--highlight-color);
+}
+
+.weather__btn-city {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  color: var(--main-background);
+  text-align: start;
+  cursor: pointer;
+}
+
+.weather__btn-city:hover,
+.weather__btn-city:focus-visible {
+  background-color: #0b131e14;
+}
+
+/* ===== ICON HEADER ===== */
+.weather__icon-wind-header {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--translucent-surface);
+  color: var(--highlight-color);
+  font-size: 1.25rem;
+}
+
+/* ===== MAIN ===== */
+.weather__container-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+}
+
+/* ===== LOADING / ERRO ===== */
+.weather__loading,
+.weather__error {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.weather__icon-loading {
+  width: clamp(2.5rem, 8vh, 3.5rem);
+  aspect-ratio: 1;
+  border: 4px solid var(--divider-color);
+  border-top-color: var(--highlight-color);
+  border-radius: 50%;
+  animation: weather-spin 0.8s linear infinite;
+}
+
+.weather__icon-error {
+  color: var(--alert-color);
+  font-size: clamp(2rem, 6vh, 3rem);
+}
+
+.weather__text-loading,
+.weather__text-not-found {
+  max-width: 32ch;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+@keyframes weather-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Quem pediu menos movimento no sistema recebe pulso, não giro */
+@media (prefers-reduced-motion: reduce) {
+  .weather__icon-loading {
+    animation: weather-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes weather-pulse {
+    50% {
+      opacity: 0.3;
+    }
+  }
+}
+
+/* ===== SUCESSO ===== */
+.weather__success {
+  min-width: 0;
+  display: grid;
+  grid-template-areas:
+    "city weekly"
+    "forecast weekly"
+    "condition weekly";
+  column-gap: 1.5rem;
+  row-gap: var(--block-gap);
+  width: 100%;
+}
+
+/* Base dos três cartões: fundo, respiro e coluna que estica */
+.weather__card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  border-radius: var(--card-radius);
+  background-color: var(--secondary-background);
+}
+
+/* A lista ocupa a sobra de altura do cartão em vez de encostar no topo */
+.weather__list-time,
+.weather__list-conditions,
+.weather__list-weekly {
+  flex: 1;
+}
+
+.weather__subtitle {
+  margin-bottom: clamp(0.5rem, min(2vh, 3vw), 1.5rem);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+/* ===== CITIES ===== */
+.weather__city-container {
+  grid-area: city;
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0 0 clamp(0px, 2vw, 2rem);
+}
+
+.weather__city-info {
+  /* Sem isto o flex se recusa a encolher abaixo da maior palavra,
+     e o break-word do h1 nunca chega a ser acionado */
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.weather__city-choose {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.weather__city-name {
+  font-size: clamp(1.5rem, min(4vh, 6.5vw), 2.5rem);
+  /* Nome de cidade vem da API: sem isso, um nome muito longo empurra
+     a página inteira para o lado */
+  overflow-wrap: break-word;
+}
+
+.weather__city-rain {
+  font-size: 0.8rem;
+}
+
+.weather__city-temp {
+  font-size: clamp(2.5rem, min(7vh, 11vw), 4rem);
+}
+
+.weather__icon-current {
+  display: block;
+  font-size: clamp(3.5rem, min(18vh, 20vw), 13rem);
+  line-height: 1;
+}
+
+/* ===== FORECAST ===== */
+.weather__forecast-container {
+  grid-area: forecast;
+}
+
+/* Colunas iguais, criadas conforme a quantidade de itens */
+.weather__list-time {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+/* space-between espalha hora / ícone / temperatura na altura do cartão;
+   o gap é só o respiro mínimo quando não sobra espaço */
+.weather__item-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.5rem, min(1.5vh, 2vw), 1rem);
+}
+
+.weather__time {
+  font-size: clamp(0.7rem, min(1.6vh, 3vw), 0.875rem);
+}
+
+.weather__icon-hour {
+  width: clamp(1.5rem, min(6vh, 7vw), 3.5rem);
+  aspect-ratio: 1;
+}
+
+.weather__forecast-temp {
+  font-size: clamp(0.875rem, min(2.4vh, 4vw), 1.25rem);
+}
+
+/* ===== CONDITIONS ===== */
+.weather__conditions-air {
+  grid-area: condition;
+}
+
+/* auto-rows em 1fr divide a altura igualmente entre as linhas que existirem */
+.weather__list-conditions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(min-content, 1fr);
+  gap: clamp(0.75rem, min(2vh, 3vw), 1.5rem);
+}
+
+.weather__item-condition {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.weather__icon-condition {
+  width: clamp(1.25rem, min(3vh, 4vw), 1.5rem);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  fill: var(--default-text-color);
+}
+
+.weather__condition-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0px, 1vw, 0.25rem);
+}
+
+.weather__text-condition {
+  font-size: clamp(0.8rem, min(1.8vh, 3.5vw), 1.25rem);
+}
+
+.weather__info-condition {
+  font-size: clamp(1.25rem, min(3.4vh, 5.5vw), 2rem);
+}
+
+/* ===== WEEKLY ===== */
+.weather__forecast-weekly {
+  grid-area: weekly;
+}
+
+.weather__list-weekly {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.weather__item-weekly {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.weather__weekday {
+  width: clamp(3.5rem, 8vw, 4.5rem);
+  flex-shrink: 0;
+}
+
+.weather__weekly-info {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.weather__icon-day {
+  font-size: clamp(1.25rem, min(4vh, 5vw), 3.5rem);
+  line-height: 1;
+}
+
+/* Orçamento de ~20 caracteres em uma linha a 375px de largura */
+.weather__status-text {
+  font-size: clamp(0.8rem, min(2vh, 3.4vw), 1rem);
+}
+
+.weather__temp {
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.weather__footer {
+  min-height: clamp(32px, 3.5vw, 40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: clamp(0.75rem, 2vw, 1rem);
+  text-align: center;
+}
+
+.weather__footer-paragraph {
+  font-size: clamp(0.75rem, 2.2vw, 1rem);
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .weather__list-weekly {
+    gap: 0;
+  }
+
+  .weather__item-weekly {
+    flex-wrap: wrap;
+  }
+
+  .weather__item-weekly:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin-top: 0.5rem;
+    background-color: var(--divider-color);
+  }
+
+  .weather__weekday {
+    width: auto;
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+  }
+
+  .weather__icon-day {
+    font-size: 1.5rem;
+  }
+
+  .weather__status-text {
+    color: inherit;
+  }
+
+  .weather__temp {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 1rem 0;
+  }
+
+  .weather__search {
+    flex: 1;
+  }
+
+  .weather__success {
+    grid-template-areas:
+      "city"
+      "forecast"
+      "condition"
+      "weekly";
+    column-gap: 0;
+  }
+
+  .weather__city-container {
+    padding: 0;
+  }
+}

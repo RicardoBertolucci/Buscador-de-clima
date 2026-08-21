@@ -14,6 +14,41 @@
   </head>
 
   <body>
+    <svg
+      class="weather__gradients"
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <radialGradient id="g-sol" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#ffe08a" />
+          <stop offset="100%" stop-color="#f5a623" />
+        </radialGradient>
+        <linearGradient id="g-nv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#c3d0e0" />
+        </linearGradient>
+        <linearGradient id="g-nv2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#cdd8e5" />
+        </linearGradient>
+        <linearGradient id="g-cf" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#d8e2ec" />
+          <stop offset="100%" stop-color="#8f9fb2" />
+        </linearGradient>
+        <linearGradient id="g-tp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c9d4e0" />
+          <stop offset="100%" stop-color="#7c8b9e" />
+        </linearGradient>
+        <linearGradient id="g-ne" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="100%" stop-color="#ccd8e6" />
+        </linearGradient>
+      </defs>
+    </svg>
+
     <header class="weather__header">
       <search class="weather__search">
         <label class="weather__search-container">
@@ -66,7 +101,6 @@
       <!-- ERRO -->
       <div class="weather__error" role="alert" hidden>
         <i class="fa-solid fa-triangle-exclamation weather__icon-error" aria-hidden="true"></i>
-        <!-- texto trocado pelo JS -->
         <p class="weather__text-not-found">Cidade não encontrada.</p>
       </div>
 
@@ -80,9 +114,6 @@
             </div>
             <span class="weather__city-temp">31°</span>
           </div>
-          <span class="weather__icon-current" role="img" aria-label="Ensolarado"
-            >☀️</span
-          >
         </section>
 
         <!-- Section da previsão do dia -->
@@ -93,37 +124,6 @@
               <time class="weather__time" datetime="2026-08-18T06:00"
                 >06:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                role="img"
-                aria-label="Parcialmente Nublado"
-                viewBox="0 0 64 64"
-              >
-                <defs>
-                  <radialGradient id="g-sol2" cx="40%" cy="35%">
-                    <stop offset="0%" stop-color="#ffe08a" />
-                    <stop offset="100%" stop-color="#f5a623" />
-                  </radialGradient>
-                  <linearGradient id="g-nv2" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#cdd8e5" />
-                  </linearGradient>
-                </defs>
-                <g stroke="#f7b733" stroke-width="3.5" stroke-linecap="round">
-                  <line x1="24" y1="4" x2="24" y2="10" />
-                  <line x1="4" y1="24" x2="10" y2="24" />
-                  <line x1="10" y1="10" x2="14" y2="14" />
-                  <line x1="38" y1="10" x2="34" y2="14" />
-                  <line x1="44" y1="24" x2="38" y2="24" />
-                </g>
-                <circle cx="24" cy="24" r="11" fill="url(#g-sol2)" />
-                <g fill="url(#g-nv2)">
-                  <circle cx="26" cy="44" r="10" />
-                  <circle cx="38" cy="38" r="13" />
-                  <circle cx="48" cy="45" r="9" />
-                  <rect x="24" y="44" width="26" height="10" rx="5" />
-                </g>
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -131,30 +131,6 @@
               <time class="weather__time" datetime="2026-08-18T09:00"
                 >09:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                role="img"
-                aria-label="Céu limpo"
-                viewBox="0 0 64 64"
-              >
-                <defs>
-                  <radialGradient id="g-sol" cx="40%" cy="35%">
-                    <stop offset="0%" stop-color="#ffe08a" />
-                    <stop offset="100%" stop-color="#f5a623" />
-                  </radialGradient>
-                </defs>
-                <g stroke="#f7b733" stroke-width="4" stroke-linecap="round">
-                  <line x1="32" y1="5" x2="32" y2="12" />
-                  <line x1="32" y1="52" x2="32" y2="59" />
-                  <line x1="5" y1="32" x2="12" y2="32" />
-                  <line x1="52" y1="32" x2="59" y2="32" />
-                  <line x1="13" y1="13" x2="18" y2="18" />
-                  <line x1="46" y1="46" x2="51" y2="51" />
-                  <line x1="51" y1="13" x2="46" y2="18" />
-                  <line x1="18" y1="46" x2="13" y2="51" />
-                </g>
-                <circle cx="32" cy="32" r="14" fill="url(#g-sol)" />
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -162,25 +138,6 @@
               <time class="weather__time" datetime="2026-08-18T12:00"
                 >12:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-label="Nublado"
-              >
-                <defs>
-                  <linearGradient id="g-nv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#c3d0e0" />
-                  </linearGradient>
-                </defs>
-                <g fill="url(#g-nv)">
-                  <circle cx="22" cy="38" r="12" />
-                  <circle cx="36" cy="30" r="15" />
-                  <circle cx="47" cy="39" r="10" />
-                  <rect x="20" y="38" width="29" height="12" rx="6" />
-                </g>
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -188,30 +145,6 @@
               <time class="weather__time" datetime="2026-08-18T15:00"
                 >15:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-label="Garoa"
-              >
-                <defs>
-                  <linearGradient id="g-ga" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#c3d0e0" />
-                  </linearGradient>
-                </defs>
-                <g fill="url(#g-ga)">
-                  <circle cx="22" cy="30" r="11" />
-                  <circle cx="36" cy="24" r="14" />
-                  <circle cx="46" cy="31" r="9" />
-                  <rect x="20" y="30" width="27" height="11" rx="5.5" />
-                </g>
-                <g stroke="#5fa8e5" stroke-width="3" stroke-linecap="round">
-                  <line x1="24" y1="47" x2="22" y2="52" />
-                  <line x1="34" y1="47" x2="32" y2="52" />
-                  <line x1="44" y1="47" x2="42" y2="52" />
-                </g>
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -219,31 +152,6 @@
               <time class="weather__time" datetime="2026-08-18T18:00"
                 >18:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-label="Chuva forte"
-              >
-                <defs>
-                  <linearGradient id="g-cf" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#d8e2ec" />
-                    <stop offset="100%" stop-color="#8f9fb2" />
-                  </linearGradient>
-                </defs>
-                <g fill="url(#g-cf)">
-                  <circle cx="21" cy="27" r="12" />
-                  <circle cx="36" cy="21" r="15" />
-                  <circle cx="47" cy="28" r="10" />
-                  <rect x="19" y="27" width="29" height="12" rx="6" />
-                </g>
-                <g stroke="#2b7ec4" stroke-width="4" stroke-linecap="round">
-                  <line x1="20" y1="44" x2="15" y2="57" />
-                  <line x1="30" y1="44" x2="25" y2="57" />
-                  <line x1="40" y1="44" x2="35" y2="57" />
-                  <line x1="50" y1="44" x2="45" y2="57" />
-                </g>
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -251,29 +159,6 @@
               <time class="weather__time" datetime="2026-08-18T21:00"
                 >21:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-label="Tempestade"
-              >
-                <defs>
-                  <linearGradient id="g-tp" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#c9d4e0" />
-                    <stop offset="100%" stop-color="#7c8b9e" />
-                  </linearGradient>
-                </defs>
-                <g fill="url(#g-tp)">
-                  <circle cx="21" cy="27" r="12" />
-                  <circle cx="36" cy="21" r="15" />
-                  <circle cx="47" cy="28" r="10" />
-                  <rect x="19" y="27" width="29" height="12" rx="6" />
-                </g>
-                <path
-                  d="M34 39 L22 55 L30 55 L26 63 L42 45 L33 45 Z"
-                  fill="#ffc93c"
-                />
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
 
@@ -281,42 +166,6 @@
               <time class="weather__time" datetime="2026-08-19T00:00"
                 >00:00</time
               >
-              <svg
-                class="weather__icon-hour"
-                viewBox="0 0 64 64"
-                role="img"
-                aria-label="Neve"
-              >
-                <defs>
-                  <linearGradient id="g-ne" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ffffff" />
-                    <stop offset="100%" stop-color="#ccd8e6" />
-                  </linearGradient>
-                </defs>
-                <g fill="url(#g-ne)">
-                  <circle cx="22" cy="28" r="11" />
-                  <circle cx="36" cy="22" r="14" />
-                  <circle cx="46" cy="29" r="9" />
-                  <rect x="20" y="28" width="27" height="11" rx="5.5" />
-                </g>
-                <g stroke="#8fd0f0" stroke-width="2.5" stroke-linecap="round">
-                  <g>
-                    <line x1="21" y1="45" x2="21" y2="55" />
-                    <line x1="17" y1="47" x2="25" y2="53" />
-                    <line x1="25" y1="47" x2="17" y2="53" />
-                  </g>
-                  <g>
-                    <line x1="34" y1="45" x2="34" y2="55" />
-                    <line x1="30" y1="47" x2="38" y2="53" />
-                    <line x1="38" y1="47" x2="30" y2="53" />
-                  </g>
-                  <g>
-                    <line x1="47" y1="45" x2="47" y2="55" />
-                    <line x1="43" y1="47" x2="51" y2="53" />
-                    <line x1="51" y1="47" x2="43" y2="53" />
-                  </g>
-                </g>
-              </svg>
               <span class="weather__forecast-temp">25°</span>
             </li>
           </ul>
@@ -405,7 +254,6 @@
                 >Segunda</time
               >
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -418,7 +266,6 @@
             <li class="weather__item-weekly">
               <time class="weather__weekday" datetime="2026-08-18">Terça</time>
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -431,7 +278,6 @@
             <li class="weather__item-weekly">
               <time class="weather__weekday" datetime="2026-08-19">Quarta</time>
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -444,7 +290,6 @@
             <li class="weather__item-weekly">
               <time class="weather__weekday" datetime="2026-08-20">Quinta</time>
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -457,7 +302,6 @@
             <li class="weather__item-weekly">
               <time class="weather__weekday" datetime="2026-08-21">Sexta</time>
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -470,7 +314,6 @@
             <li class="weather__item-weekly">
               <time class="weather__weekday" datetime="2026-08-22">Sábado</time>
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">
@@ -485,7 +328,6 @@
                 >Domingo</time
               >
               <div class="weather__weekly-info">
-                <span class="weather__icon-day" aria-hidden="true">☀️</span>
                 <p class="weather__status-text">Ensolarado</p>
               </div>
               <div class="weather__temp">

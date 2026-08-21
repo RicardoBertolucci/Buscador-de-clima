@@ -11,19 +11,16 @@ ul {
   list-style: none;
 }
 
-/* Botão e input não herdam a fonte do body por padrão (vinham em Arial) */
 button,
 input {
   font: inherit;
   color: inherit;
 }
 
-/* Remove o espaço de baseline que o SVG ganha por ser inline */
 svg {
   display: block;
 }
 
-/* O atributo hidden precisa vencer o display das classes de estado */
 [hidden] {
   display: none !important;
 }
@@ -53,14 +50,10 @@ body {
   padding: 1.5rem 1.5rem 0;
   background-color: var(--main-background);
   font-family: var(--font);
-  /* Fixo de propósito: com line-height "normal" a altura da página muda
-     conforme a fonte que carregar, e aí o layout deixa de caber na tela */
   line-height: 1.2;
   color: var(--default-text-color);
 }
 
-/* ===== TIPOGRAFIA COMPARTILHADA =====
-   As duas decisões que se repetiam em quase toda seção, num lugar só */
 .weather__city-name,
 .weather__city-temp,
 .weather__forecast-temp,
@@ -111,7 +104,6 @@ body {
   background-color: var(--secondary-background);
 }
 
-/* Anel de foco no container, já que o input tem o outline removido */
 .weather__search-container:focus-within {
   outline: 2px solid var(--highlight-color);
   outline-offset: 2px;
@@ -226,7 +218,6 @@ body {
   }
 }
 
-/* Quem pediu menos movimento no sistema recebe pulso, não giro */
 @media (prefers-reduced-motion: reduce) {
   .weather__icon-loading {
     animation: weather-pulse 1.4s ease-in-out infinite;
@@ -252,7 +243,6 @@ body {
   width: 100%;
 }
 
-/* Base dos três cartões: fundo, respiro e coluna que estica */
 .weather__card {
   min-width: 0;
   display: flex;
@@ -262,7 +252,6 @@ body {
   background-color: var(--secondary-background);
 }
 
-/* A lista ocupa a sobra de altura do cartão em vez de encostar no topo */
 .weather__list-time,
 .weather__list-conditions,
 .weather__list-weekly {
@@ -287,8 +276,6 @@ body {
 }
 
 .weather__city-info {
-  /* Sem isto o flex se recusa a encolher abaixo da maior palavra,
-     e o break-word do h1 nunca chega a ser acionado */
   min-width: 0;
   align-self: stretch;
   display: flex;
@@ -305,8 +292,6 @@ body {
 
 .weather__city-name {
   font-size: clamp(1.5rem, min(4vh, 6.5vw), 2.5rem);
-  /* Nome de cidade vem da API: sem isso, um nome muito longo empurra
-     a página inteira para o lado */
   overflow-wrap: break-word;
 }
 
@@ -329,15 +314,12 @@ body {
   grid-area: forecast;
 }
 
-/* Colunas iguais, criadas conforme a quantidade de itens */
 .weather__list-time {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, 1fr);
 }
 
-/* space-between espalha hora / ícone / temperatura na altura do cartão;
-   o gap é só o respiro mínimo quando não sobra espaço */
 .weather__item-time {
   display: flex;
   flex-direction: column;
@@ -364,7 +346,6 @@ body {
   grid-area: condition;
 }
 
-/* auto-rows em 1fr divide a altura igualmente entre as linhas que existirem */
 .weather__list-conditions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -436,7 +417,6 @@ body {
   line-height: 1;
 }
 
-/* Orçamento de ~20 caracteres em uma linha a 375px de largura */
 .weather__status-text {
   font-size: clamp(0.8rem, min(2vh, 3.4vw), 1rem);
 }

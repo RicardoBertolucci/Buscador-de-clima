@@ -110,6 +110,8 @@ body {
 }
 
 .weather__magnifying-icon {
+  background: none;
+  border: none;
   color: var(--highlight-color);
   cursor: pointer;
 }
@@ -304,9 +306,8 @@ body {
 }
 
 .weather__icon-current {
-  display: block;
-  font-size: clamp(3.5rem, min(18vh, 20vw), 13rem);
-  line-height: 1;
+  width: clamp(3.5rem, min(18vh, 20vw), 13rem);
+  aspect-ratio: 1;
 }
 
 /* ===== FORECAST ===== */
@@ -413,8 +414,8 @@ body {
 }
 
 .weather__icon-day {
-  font-size: clamp(1.25rem, min(4vh, 5vw), 3.5rem);
-  line-height: 1;
+  width: clamp(1.25rem, min(4vh, 5vw), 3.5rem);
+  aspect-ratio: 1;
 }
 
 .weather__status-text {

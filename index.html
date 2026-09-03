@@ -34,6 +34,10 @@
           <stop offset="0%" stop-color="#ffffff" />
           <stop offset="100%" stop-color="#cdd8e5" />
         </linearGradient>
+        <linearGradient id="g-nb" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e5ecf4" />
+          <stop offset="100%" stop-color="#aab8c8" />
+        </linearGradient>
         <linearGradient id="g-cf" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#d8e2ec" />
           <stop offset="100%" stop-color="#8f9fb2" />
@@ -51,19 +55,23 @@
 
     <header class="weather__header">
       <search class="weather__search">
-        <label class="weather__search-container">
-          <i
-            class="fa-solid fa-magnifying-glass weather__magnifying-icon"
-            aria-hidden="true"
-          ></i>
+        <form class="weather__search-container">
+          <button
+            type="submit"
+            class="weather__magnifying-icon"
+            aria-label="Buscar"
+          >
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </button>
           <input
             type="search"
             aria-label="Buscar cidade"
             placeholder="Buscar cidade"
             id="weather__input"
             class="weather__input"
+            autocomplete="off"
           />
-        </label>
+        </form>
 
         <!-- ÚLTIMAS 5 BUSCAS -->
         <ul class="weather__recent-searches" role="list" hidden>
@@ -100,19 +108,22 @@
 
       <!-- ERRO -->
       <div class="weather__error" role="alert" hidden>
-        <i class="fa-solid fa-triangle-exclamation weather__icon-error" aria-hidden="true"></i>
+        <i
+          class="fa-solid fa-triangle-exclamation weather__icon-error"
+          aria-hidden="true"
+        ></i>
         <p class="weather__text-not-found">Cidade não encontrada.</p>
       </div>
 
-      <div class="weather__success">
+      <div class="weather__success" hidden>
         <!-- Section da cidade escolhida -->
         <section class="weather__city-container">
           <div class="weather__city-info">
             <div class="weather__city-choose">
-              <h1 class="weather__city-name">Madrid</h1>
-              <p class="weather__city-rain">Chance de chuva: 0%</p>
+              <h1 class="weather__city-name"></h1>
+              <p class="weather__city-rain">Chance de chuva: <span></span></p>
             </div>
-            <span class="weather__city-temp">31°</span>
+            <span class="weather__city-temp"></span>
           </div>
         </section>
 

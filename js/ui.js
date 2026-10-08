@@ -45,8 +45,6 @@ const showCityStatusCurrently = ({ name, data }) => {
 
 // SECTION PREVIOUS DAY
 const showPreviousDay = ({ data }) => {
-  console.log(data);
-
   const dailyInfo = document.querySelectorAll(".weather__item-time");
 
   dailyInfo.forEach(temp => {
@@ -65,6 +63,25 @@ const showPreviousDay = ({ data }) => {
     }
 
     timeOfDay.insertAdjacentHTML("afterend", iconOfDay.svg);
+  })
+}
+
+// SECTION AIR CONDITIONS
+const showAirConditions = ({data}) => {
+  const listCondtions = document.querySelectorAll(".weather__item-condition");
+  let now = data.current.time;
+  const hourCurrent = Number(now.slice(11, 13));
+  
+
+  console.log(data);
+  // console.log(Math.trunc(data.hourly.wind_speed_10m[hourCurrent]));
+  listCondtions.forEach((condition, index) => {
+    let dataCondition = condition.querySelector(".weather__info-condition");
+    
+    if(index === 0) dataCondition.textContent = Math.trunc(data.hourly.apparent_temperature[hourCurrent]);
+    if(index === 1) dataCondition.textContent = Math.trunc(data.hourly.wind_speed_10m[hourCurrent]);
+    if(index === 2) dataCondition.textContent = Math.trunc(data.hourly.precipitation_probability[hourCurrent]);
+    if(index === 3) dataCondition.textContent = Math.trunc(data.hourly.uv_index[hourCurrent]);
   })
 }
 
@@ -231,6 +248,7 @@ export async function showSuccess({ name, data }) {
 
   showCityStatusCurrently({ name, data });
   showPreviousDay({ data });
+  showAirConditions({ data });
 }
 
 export async function showError() {
@@ -238,7 +256,3 @@ export async function showError() {
 
   sectionError.hidden = true;
 }
-
-
-
-

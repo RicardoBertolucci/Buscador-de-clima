@@ -56,7 +56,7 @@ const showPreviousDay = ({ data }) => {
       if (data.hourly.time[i].slice(11, 13) === timeOfDay.textContent.slice(0, 2)) {
         iconOfDay = climaPorCodigo(
           data.hourly.weather_code[i],
-          "weather__icon-daily",
+          "weather__icon-hour",
         );
         currentTemp.textContent = `${Math.trunc(data.hourly.temperature_2m[i])}°`;
       }
@@ -67,21 +67,35 @@ const showPreviousDay = ({ data }) => {
 }
 
 // SECTION AIR CONDITIONS
-const showAirConditions = ({data}) => {
+const showAirConditions = ({ data }) => {
   const listCondtions = document.querySelectorAll(".weather__item-condition");
   let now = data.current.time;
   const hourCurrent = Number(now.slice(11, 13));
-  
 
-  console.log(data);
-  // console.log(Math.trunc(data.hourly.wind_speed_10m[hourCurrent]));
   listCondtions.forEach((condition, index) => {
     let dataCondition = condition.querySelector(".weather__info-condition");
-    
-    if(index === 0) dataCondition.textContent = Math.trunc(data.hourly.apparent_temperature[hourCurrent]);
-    if(index === 1) dataCondition.textContent = Math.trunc(data.hourly.wind_speed_10m[hourCurrent]);
-    if(index === 2) dataCondition.textContent = Math.trunc(data.hourly.precipitation_probability[hourCurrent]);
-    if(index === 3) dataCondition.textContent = Math.trunc(data.hourly.uv_index[hourCurrent]);
+
+    if (index === 0) dataCondition.textContent = `${Math.trunc(data.hourly.apparent_temperature[hourCurrent])}°`;
+    if (index === 1) dataCondition.textContent = `${Math.trunc(data.hourly.wind_speed_10m[hourCurrent])}km/h`;
+    if (index === 2) dataCondition.textContent = `${Math.trunc(data.hourly.precipitation_probability[hourCurrent])}%`;
+    if (index === 3) dataCondition.textContent = Math.trunc(data.hourly.uv_index[hourCurrent]);
+  })
+}
+
+// SECTION PREVIOUS WEEKLY
+const showPreviouWeekly = ({ data }) => {
+  const forecastWeekly = document.querySelectorAll(".weather__item-weekly");
+  let iconOfWeeklyDay;
+
+  forecastWeekly.forEach((weeklyDay, index) => {
+    const divIconWeeklyInfo = weeklyDay.querySelector(".weather__weekly-info");
+
+    iconOfWeeklyDay = climaPorCodigo(
+      data.daily.weather_code[index],
+      "weather__icon-day",
+    );
+  
+    divIconWeeklyInfo.insertAdjacentHTML("beforeend", iconOfWeeklyDay.svg);
   })
 }
 
@@ -249,6 +263,7 @@ export async function showSuccess({ name, data }) {
   showCityStatusCurrently({ name, data });
   showPreviousDay({ data });
   showAirConditions({ data });
+  showPreviouWeekly({ data });
 }
 
 export async function showError() {

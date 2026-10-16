@@ -20,6 +20,11 @@ export async function loadStatusCity() {
   return (sectionLoading.hidden = true);
 }
 
+// CLEAN WEATHERCODE
+const cleanWeatherCode = (el) => {
+  el.remove();
+};
+
 // SECTION STATUS CURRENT
 const showCityStatusCurrently = ({ name, data }) => {
   const sectionCurrent = document.querySelector(".weather__city-container");
@@ -28,6 +33,11 @@ const showCityStatusCurrently = ({ name, data }) => {
   const temperature = document.querySelector(".weather__city-temp");
   const now = data.current.time;
   const hourCurrent = Number(now.slice(11, 13));
+  let nearElement = sectionCurrent.querySelector("svg");
+
+  if (nearElement) {
+    cleanWeatherCode(nearElement);
+  }
 
   nameCity.textContent = name;
 
@@ -46,8 +56,12 @@ const showCityStatusCurrently = ({ name, data }) => {
 // SECTION PREVIOUS DAY
 const showPreviousDay = ({ data }) => {
   const dailyInfo = document.querySelectorAll(".weather__item-time");
-
+  
+  console.log(data)
+  
   dailyInfo.forEach((temp) => {
+    let nearElement = temp.querySelector("svg");
+
     let timeOfDay = temp.querySelector(".weather__time");
     let iconOfDay;
     let currentTemp = temp.querySelector(".weather__forecast-temp");
@@ -62,6 +76,10 @@ const showPreviousDay = ({ data }) => {
         );
         currentTemp.textContent = `${Math.trunc(data.hourly.temperature_2m[i])}°`;
       }
+    }
+
+    if(nearElement) {
+      cleanWeatherCode(nearElement);
     }
 
     timeOfDay.insertAdjacentHTML("afterend", iconOfDay.svg);
@@ -94,6 +112,8 @@ const showPreviouWeekly = ({ data }) => {
   let iconOfWeeklyDay;
 
   forecastWeekly.forEach((weeklyDay, index) => {
+    let nearElement = weeklyDay.querySelector("svg");
+
     const divIconWeeklyInfo = weeklyDay.querySelector(".weather__weekly-info");
     const divWeeklyTempMax = weeklyDay.querySelector(".weather__temp-max");
     const divWeeklyTempMin = weeklyDay.querySelector(".weather__temp-min");
@@ -102,6 +122,10 @@ const showPreviouWeekly = ({ data }) => {
       data.daily.weather_code[index],
       "weather__icon-day",
     );
+
+    if(nearElement){
+      cleanWeatherCode(nearElement);
+    }
 
     divIconWeeklyInfo.insertAdjacentHTML("afterbegin", iconOfWeeklyDay.svg);
 
